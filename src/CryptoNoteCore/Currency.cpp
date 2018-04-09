@@ -118,8 +118,8 @@ bool Currency::getBlockReward(size_t medianSize, size_t currentBlockSize, uint64
 
   if (alreadyGeneratedCoins < 1000000)
   {
-
-	  reward = 30000000; //10% Premine
+	  logger(TRACE) << "Premine dropping...";
+	  reward = 300000000000000; //10% Premine
   }
 
   return true;
