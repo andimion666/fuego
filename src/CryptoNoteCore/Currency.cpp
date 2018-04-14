@@ -1,3 +1,4 @@
+s
 // Copyright (c) 2011-2016 The Cryptonote developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -110,18 +111,23 @@ bool Currency::getBlockReward(size_t medianSize, size_t currentBlockSize, uint64
     return false;
   }
 
+  if (alreadyGeneratedCoins == 0) {
+	  baseReward = 1;
+  }
+
+  if (alreadyGeneratedCoins == 1) {
+	  baseReward = m_moneySupply * 0.10;
+  }
+
+  if (alreadyGeneratedCoins + baseReward >= m_moneySupply) {
+	  baseReward = 0;
+  }
+
   uint64_t penalizedBaseReward = getPenalizedAmount(baseReward, medianSize, currentBlockSize);
   uint64_t penalizedFee = getPenalizedAmount(fee, medianSize, currentBlockSize);
 
   emissionChange = penalizedBaseReward - (fee - penalizedFee);
   reward = penalizedBaseReward + penalizedFee;
-
-  if (alreadyGeneratedCoins < 1)
-  {
-	  logger(TRACE) << "Premine dropping...";
-	  reward = 300000000000000; //10% Premine
-  }
-
   return true;
 }
 
