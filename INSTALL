@@ -1,0 +1,9 @@
+Building Incendium
+
+See doc/readme-qt.rst for instructions on building Incendium QT,
+the intended-for-end-users, nice-graphical-interface, reference
+implementation of Incendium.
+
+See doc/build-*.txt for instructions on building incendiumd,
+the intended-for-services, no-graphical-interface, reference
+implementation of Incendium.
